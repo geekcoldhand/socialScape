@@ -1,0 +1,16 @@
+{
+  "name": "SocialScape",
+  "version": "1.0",
+  "description": "Mongoose social media back-end project - Main",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index",
+    "seed": "node utils/seed"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.7.2"
+  }
+}
