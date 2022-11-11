@@ -9,4 +9,13 @@ db.once("open", async () => {
   // Drop existing courses
   await User.deleteMany({});
   await Thought.deleteMany({});
+
+  const users = [];
+  const thoughts = [];
+
+  await User.collection.insertMany(users);
+  await Thoughts.collection.insertMany(thoughts);
+
+  console.info("Seeding complete! 🌱");
+  process.exit(0);
 });
