@@ -2,6 +2,7 @@ const router = require("express").Router();
 const db = require("mongoose");
 const Users = require("../../model/user");
 
+// get all users
 router.get("/", (req, res) => {
   try {
     //set the db findAll method to a user.
@@ -18,6 +19,7 @@ router.get("/", (req, res) => {
   }
 });
 
+// get a specific user
 router.get("/:id", (req, res) => {
   try {
     //set the db findOne method to a user.
@@ -39,6 +41,7 @@ router.get("/:id", (req, res) => {
   }
 });
 
+// delete a specific user
 router.delete("/:id", (req, res) => {
   try {
     //set the db findOne method to a user.
@@ -51,6 +54,55 @@ router.delete("/:id", (req, res) => {
       res.status(200).json({
         message: "deleted successfully.",
       });
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// create a new user
+router.post("/", (req, res) => {
+  try {
+    // Users.create
+    User.create(req.body).then((user) => res.status(201).json(user));
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//update a user
+router.put("/:id", (req, res) => {
+  try {
+    User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+      runValidators: true,
+    }).then((user) => {
+      if (!user) {
+        res.status(404).json({ message: "No user found with this id!" });
+        return;
+      }
+      res.status(200).json(user);
+    });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+// create a new friend
+router.post("/:id/friends/:friendId", (req, res) => {
+  try {
+    // Users.findOneAndUpdate
+
+    User.findOneAndUpdate(
+      { _id: req.params.id },
+      { $addToSet: { friends: req.params.friendId } },
+      { runValidators: true, new: true }
+    ).then((user) => {
+      if (!user) {
+        res.status(404).json({ message: "No user found with this id!" });
+        return;
+      }
+      res.status(200).json(user);
     });
   } catch (err) {
     res.status(500).json(err);

@@ -11,7 +11,7 @@ const userSchema = new Schema(
         message: "Email validation failed",
       },
     },
-    thoughts: [{ type: String }],
+    thoughts: [{ type: Schema.Types.ObjectId, ref: "Thoughts" }],
     friends: [{ type: String }],
     lastAccessed: { type: Date, default: Date.now },
   },
