@@ -11,8 +11,8 @@ const userSchema = new Schema(
         message: "Email validation failed",
       },
     },
-    thoughts: [{ type: Schema.Types.ObjectId }],
-    friends: [{ type: Schema.Types.ObjectId }],
+    thoughts: [{ type: String }],
+    friends: [{ type: String }],
     lastAccessed: { type: Date, default: Date.now },
   },
 
@@ -24,7 +24,8 @@ const userSchema = new Schema(
   }
 );
 userSchema.virtual("friendCount").get(function () {
-  return `${this.friends.count}`;
+  console.log("here is friends array", this);
+  return `${this.friends.length}`;
 });
 
 // pass the schema to the model

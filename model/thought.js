@@ -17,7 +17,7 @@ const thoughtSchema = new Schema(
   }
 );
 thoughtSchema.virtual("thoughtCount").get(function () {
-  return `${this.reactions.count}`;
+  return `${this.reactions.length}`;
 });
 // pass the schema to the model
 const Thoughts = model("Thoughts", thoughtSchema);

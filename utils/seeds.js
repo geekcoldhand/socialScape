@@ -1,5 +1,6 @@
 const db = require("../config/connection");
-const { User, Thought } = require("../model");
+const userDb = require("../model");
+const { userSeeds, thoughtSeeds } = require("./data");
 
 db.on("error", (err) => console.error(err));
 
@@ -7,14 +8,14 @@ db.once("open", async () => {
   console.log("connected");
 
   // Drop existing courses
-  await User.deleteMany({});
-  await Thought.deleteMany({});
+  await userDb.user.deleteMany({});
+  await userDb.thoughts.deleteMany({});
 
-  const users = [];
-  const thoughts = [];
+  const users = userSeeds;
+  const thoughts = thoughtSeeds;
 
-  await User.collection.insertMany(users);
-  await Thoughts.collection.insertMany(thoughts);
+  await userDb.user.collection.insertMany(users);
+  await userDb.thoughts.collection.insertMany(thoughts);
 
   console.info("Seeding complete! 🌱");
   process.exit(0);

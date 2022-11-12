@@ -21,17 +21,13 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   try {
     //set the db findOne method to a getThought.
-    Thoughts.findOne({ _id: req.params.id })
-      .populate("thoughts")
-      .populate("friends")
-      .select("-__v")
-      .then((thought) => {
-        if (!thought) {
-          res.status(404).json({ message: "No thought found with this id!" });
-          return;
-        }
-        res.status(200).json(thought);
-      });
+    Thoughts.findOne({ _id: req.params.id }).then((thought) => {
+      if (!thought) {
+        res.status(404).json({ message: "No thought found with this id!" });
+        return;
+      }
+      res.status(200).json(thought);
+    });
   } catch (err) {
     console.error(err);
 

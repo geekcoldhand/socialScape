@@ -21,13 +21,17 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
   try {
     //set the db findOne method to a user.
-    Users.findOne({ _id: req.params.id }).then((users) => {
-      if (!users) {
-        res.status(404).json({ message: "No user found with this id!" });
-        return;
-      }
-      res.status(200).json(users);
-    });
+    Users.findOne({ _id: req.params.id })
+      .populate("thoughts")
+      .populate("friends")
+      .select("-__v")
+      .then((users) => {
+        if (!users) {
+          res.status(404).json({ message: "No user found with this id!" });
+          return;
+        }
+        res.status(200).json(users);
+      });
   } catch (err) {
     console.error(err);
 
