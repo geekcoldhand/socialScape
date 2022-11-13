@@ -21,6 +21,8 @@ Clone the repository from github. Ensure to download and connect to MongoDB. Run
 
 ## Usage
 
+![](./assests/img/scapeScreenShot.png)
+
 ## License
 
     This application is covered by the APACHE license.
