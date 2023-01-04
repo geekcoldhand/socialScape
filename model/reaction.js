@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 
 const reactionSchema = new Schema({
-  id: { type: Schema.Types.ObjectId, default: () => new Types.ObjectId() },
   content: { type: String, required: true },
   username: { type: String, required: true },
   lastAccessed: { type: Date, default: Date.now },

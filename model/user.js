@@ -7,12 +7,16 @@ const userSchema = new Schema(
       type: String,
       required: true,
       validate: {
-        validator: () => Promise.resolve(false),
-        message: "Email validation failed",
+        validator: () =>
+          function (email) {
+            var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            return re.test(email);
+          },
       },
     },
+    password: { type: String, required: true },
     thoughts: [{ type: Schema.Types.ObjectId, ref: "Thoughts" }],
-    friends: [{ type: String }],
+    friends: [{ type: Object }],
     lastAccessed: { type: Date, default: Date.now },
   },
 

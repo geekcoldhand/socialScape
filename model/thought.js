@@ -1,12 +1,13 @@
 const { Schema, model } = require("mongoose");
 const { reactionSchema } = require("./reaction");
+
 // create a thought schema for model
 const thoughtSchema = new Schema(
   {
     content: { type: String, required: true, maxLength: 280, minLength: 1 },
     createdAt: { type: Date, default: Date.now },
     username: { type: String, required: true },
-    reactions: { type: [reactionSchema] },
+    reactions: { type: [Schema.Types.ObjectId], ref: "Reactions" },
   },
 
   {

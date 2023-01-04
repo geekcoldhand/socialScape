@@ -6,16 +6,20 @@ const Users = require("../../model/user");
 router.get("/", (req, res) => {
   try {
     //set the db findAll method to a user.
-    Users.find().then((users) => {
-      if (!users) {
-        res.status(404).json({ message: "Hmm... seem no users here " });
-        return;
-      }
-      res.status(200).json(users);
-    });
+    Users.find()
+      .populate("thoughts")
+      .populate("friends")
+      .then((users) => {
+        if (!users) {
+          res.status(404).json({ message: "Hmm... seem no users here " });
+          return;
+        }
+        res.status(200).json(users);
+      });
     // respond with the data
   } catch (err) {
-    res.status(400).json(err);
+    console.log(err);
+    res.status(500).json(err);
   }
 });
 
@@ -61,11 +65,14 @@ router.delete("/:id", (req, res) => {
 });
 
 // create a new user
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   try {
     // Users.create
-    User.create(req.body).then((user) => res.status(201).json(user));
+    const newUser = await Users.create(req.body);
+
+    res.status(201).json(newUser);
   } catch (err) {
+    console.log("Uh oh server..", err);
     res.status(500).json(err);
   }
 });

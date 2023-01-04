@@ -3,7 +3,26 @@ const userSeeds = [
     username: "Ray",
     email: "ray@gmail.com",
     thoughts: ["hello world", "i like Neo"],
-    friends: ["jay", "kay", "may"],
+    friends: [
+      {
+        username: "jay",
+        email: "jay@gmail.com",
+        thoughts: ["hello jungle", "i like computers"],
+        friends: ["ray", "kay", "may"],
+      },
+      {
+        username: "kay",
+        email: "kay@gmail.com",
+        thoughts: ["hello paradise", "i like chickens"],
+        friends: ["jay", "ray", "may"],
+      },
+      {
+        username: "may",
+        email: "may@gmail.com",
+        thoughts: ["hello new york city", "i like fruit"],
+        friends: ["jay", "kay", "ray"],
+      },
+    ],
   },
   {
     username: "jay",
