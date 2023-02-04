@@ -1,40 +1,47 @@
-# SocialScape
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-![Badge](https://img.shields.io/badge/License-APACHE-blue.svg)
+# Table of Contents
 
-## Description
+    1. [Github](#Github)
+    2. [Email](#Email)
+    3. [Title](#Title)
+    4. [Details](#Details)
+    5. [Installation](#Installation)
+    6. [Benefits](#Benefits)
+    7. [Licenses](#Licenses)
+    8. [Contributions](#Contributions)
+    9. [Test](#Test)
 
-Social network web application where users can share their thoughts, react to friends' thoughts, and create a friend list. Tech: Express.js, MongoDB and Mongoose ODM
+    # Social Scape
 
-## Table of Content
+# Details
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [License](./LICENSE-APACHE.md)
-- [Contributing](#contributing)
-- [Test](#Test)
-- [Questions](#questions)
+a clone of differnet social medias to bring the best platform for stimulating communities'
 
-## Installation
+# Installation
 
-Clone the repository from github. Ensure to download and connect to MongoDB. Run npm install to download all the dependencies including, express, mongoose, and a date library of your choice. Then use Insomnia for all testing.
+React
 
-## Usage
+# Benefits
 
-![](./assests/img/scapeScreenShot.png)
+a plaform for smart people
 
-## License
+# Licenses
 
-    This application is covered by the APACHE license.
+Apache
 
-## Contributing
+# Contributions
 
-To contribute, please email the creator for details.
+Leo Thomas
 
-## Test
+# Test
 
-No tests at this time.
+No test have been done at this time
 
-## Questions
+# Github
+
+https://github.com/geekcoldhand/super-scape
+
+# Email
 
 horatiousaharris@gmail.com

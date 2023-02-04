@@ -2,7 +2,18 @@ const { Schema, model } = require("mongoose");
 // create a user schema for the model
 const userSchema = new Schema(
   {
-    username: { type: String, required: true, maxLength: 50 },
+    firstName: {
+      type: String,
+      required: true,
+      min: 2,
+      max: 50,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      min: 2,
+      max: 50,
+    },
     email: {
       type: String,
       required: true,
@@ -17,7 +28,19 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     thoughts: [{ type: Schema.Types.ObjectId, ref: "Thoughts" }],
     friends: [{ type: Object }],
+    picturePath: {
+      type: String,
+      default: "",
+    },
     lastAccessed: { type: Date, default: Date.now },
+    communities: {
+      type: Array,
+      default: []
+    },
+    location: String,
+    occupation: String,
+    viewedProfile: Number,
+    impressions: Number,
   },
 
   {
