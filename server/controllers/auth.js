@@ -1,8 +1,8 @@
-import brycpt from "brycpt";
+import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/userr.js";
 
-//register the users
+//creating and registering the new users
 export const register = async (req, res) => {
   try {
     const {
@@ -14,14 +14,14 @@ export const register = async (req, res) => {
       location,
       occupation,
       picturePath,
-      viewProfile,
+      viewedProfile,
     } = req.body;
-    const salt = await brycpt.genSalt();
-    const passwordHash = await brycpt.hash([password, salt]);
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash([password, salt]);
 
     const newUser = new User({
-      firstName,
-      lastName,
+      firstname,
+      lastname,
       email,
       password: passwordHash,
       picturePath,
@@ -34,11 +34,11 @@ export const register = async (req, res) => {
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (error) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
-// login user
+// login user with auth checking 
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -49,9 +49,9 @@ export const login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    delete user.password;
+    delete user.password; 
     res.status(200).json({ token, user });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };

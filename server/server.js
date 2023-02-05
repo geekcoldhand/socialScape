@@ -8,7 +8,8 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
-import { register } from "./controllers/";
+import { register } from "./controllers/auth.js";
+import authRoutes from "./routes/auth.js";
 
 // CONFIG
 dotenv.config();
@@ -44,8 +45,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage }); //picture and other files uploaded with multer
 
-// Routes with files
+// Routes with files (cannont move from server)
 app.post("/auth/register", upload.single("picture"), register);
+// Routes
+app.use("/auth", authRoutes);
 
 // mongoose
 mongoose.connect(process.env.MONGO_URL, {
