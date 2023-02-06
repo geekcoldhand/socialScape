@@ -10,6 +10,7 @@ import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import { register } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes.user.js";
 
 // CONFIG
 dotenv.config();
@@ -49,6 +50,7 @@ const upload = multer({ storage }); //picture and other files uploaded with mult
 app.post("/auth/register", upload.single("picture"), register);
 // Routes
 app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
 
 // mongoose
 mongoose.connect(process.env.MONGO_URL, {
