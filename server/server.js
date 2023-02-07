@@ -10,7 +10,10 @@ import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import { register } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes.user.js";
+import userRoutes from "./routes/user.js";
+import postRoutes from "./routes/post.js";
+import {createPost} from './controllers/post.js'
+import { veriftyToken } from "./middleware/auth.js";
 
 // CONFIG
 dotenv.config();
@@ -48,10 +51,13 @@ const upload = multer({ storage }); //picture and other files uploaded with mult
 
 // Routes with files (cannont move from server)
 app.post("/auth/register", upload.single("picture"), register);
+app.post('/post', veriftyToken, upload.single("picture"), createPost)
+
+
 // Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-
+app.use("/post", postRoutes)
 // mongoose
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
