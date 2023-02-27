@@ -12,11 +12,12 @@ import { register } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
 import postRoutes from "./routes/post.js";
-import {createPost} from './controllers/post.js'
-import { veriftyToken } from "./middleware/auth.js";
+import { createPost } from "./controllers/post.js";
+import { verifyToken } from "./middleware/auth.js";
 
 // CONFIG
 dotenv.config();
+mongoose.set('strictQuery', true);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
@@ -35,7 +36,7 @@ app.use(morgan("commmon"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
-app.use("./assets", express.static(path.join(__dirname, "public/assets"))); // set dir of assets
+app.use("./assets", express.static(path.join(__dirname, "public/assests"))); // set dir of assets
 
 // FILE STORGAE:
 const storage = multer.diskStorage({
@@ -51,13 +52,15 @@ const upload = multer({ storage }); //picture and other files uploaded with mult
 
 // Routes with files (cannont move from server)
 app.post("/auth/register", upload.single("picture"), register);
-app.post('/post', veriftyToken, upload.single("picture"), createPost)
 
+app.post("/post", verifyToken, upload.single("picture"), createPost); //making new post
 
 // Routes
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
-app.use("/post", postRoutes)
+app.use("/post", postRoutes);
+
+console.log("mongo url .. .", process.env.MONGO_URL)
 // mongoose
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,

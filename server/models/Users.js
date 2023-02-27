@@ -1,6 +1,7 @@
-const { Schema, model } = require("mongoose");
+// const { Schema, model, default: mongoose } = require("mongoose");
+import {Schema, model} from "mongoose";
 // create a user schema for the model
-const userSchema = new Schema(
+ const userSchema = new Schema(
   {
     firstName: {
       type: String,
@@ -58,4 +59,4 @@ userSchema.virtual("friendCount").get(function () {
 // pass the schema to the model
 const Users = model("Users", userSchema);
 
-module.exports = Users;
+export default  Users;

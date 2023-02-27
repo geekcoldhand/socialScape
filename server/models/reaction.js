@@ -7,4 +7,4 @@ const reactionSchema = new Schema({
 });
 // pass the schema to the model
 const Reactions = model("Reactions", reactionSchema);
-module.exports = Reactions;
+export default Reactions;

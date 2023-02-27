@@ -23,4 +23,4 @@ thoughtSchema.virtual("thoughtCount").get(function () {
 // pass the schema to the model
 const Thoughts = model("Thoughts", thoughtSchema);
 
-module.exports = Thoughts;
+export default Thoughts;

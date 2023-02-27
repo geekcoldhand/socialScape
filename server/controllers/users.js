@@ -1,10 +1,10 @@
-import { PromiseProvider } from "mongoose";
-import User from "../models/user";
+import Users from "../models/Users.js";
+import { Promise} from "mongoose";
 
 export const getUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await Users.findById(id);
     res.status(200).json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -15,7 +15,7 @@ export const getUser = async (req, res) => {
 export const getUserFriends = async (req, res) => {
   try {
     const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await Users.findById(id);
     const friends = await Promise.all(
       user.friends.map((id) => User.findById(id))
     );
@@ -35,8 +35,8 @@ export const getUserFriends = async (req, res) => {
 export const addRemoveFriend = async (req, res) => {
   try {
     const { id, friendId } = req.params;
-    const user = await User.findById(id);
-    const friend = await User.findById(friendId);
+    const user = await Users.findById(id);
+    const friend = await Users.findById(friendId);
 
     // if they are included remove
     if (user.friends.includes(friendId)) {
